@@ -24,8 +24,8 @@ gulp.task("typescript", function() {
             noImplicitAny: true,
             outFile: "main.js"
         }))
-        .pipe(gulp.dest("dist")
-        .pipe(livereload()));
+        .pipe(gulp.dest("dist"))
+        .pipe(livereload());
 });
 
 gulp.task("default", ["html", "typescript", "sass"]);
