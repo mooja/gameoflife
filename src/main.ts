@@ -14,7 +14,8 @@ class ConwayGrid {
         this.alivePositions = positions;
     }
 
-    toString() {
+    toString(): string {
+        let rv: string = '';
         for(let row = 0; row < this.height; row++) {
             const aliveOnThisRow: Pos[] = this.alivePositions.filter(pos => pos.x === row);
             let lineStr: string = '';
@@ -22,8 +23,10 @@ class ConwayGrid {
                 const blockIsAlive: boolean = aliveOnThisRow.some(pos => pos.y === col);
                 lineStr +=  blockIsAlive ? '#' : ' ';
             }
-            console.log(lineStr+'\n');
+            rv += lineStr+'\n';
         }
+        return rv;
+    }
     }
 }
 
