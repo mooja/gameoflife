@@ -27,6 +27,29 @@ class ConwayGrid {
         return this.getNeighbours(target).length;
     }
 
+    posIsAlive(target: Pos): boolean {
+        return this.alivePositions
+            .some(p => target.x === p.x && target.y === p.y);
+    }
+
+    next(): void {
+        const newAlivePositions: Pos[] = [];
+
+        for(let row = 0; row < this.height; row++) {
+            for(let col = 0; col < this.width; col++) {
+                const isAlive = this.posIsAlive({x: row, y: col});
+                const numNeighbors: number = this.getNumNeighbours({x: row, y: col});
+
+                if (isAlive && (numNeighbors === 2 || numNeighbors === 3)) 
+                    newAlivePositions.push({x: row, y: col});
+                if (!isAlive && numNeighbors === 3)
+                    newAlivePositions.push({x: row, y: col});
+            }
+        }
+
+        this.alivePositions = newAlivePositions;
+    }
+
     toString(): string {
         let rv: string = '';
         for(let row = 0; row < this.height; row++) {
@@ -46,9 +69,11 @@ class ConwayGrid {
     }
 }
 
-const g = new ConwayGrid(5, 5, [{x:1, y:1}, {x:2, y:2}, {x: 3, y:3}]);
+const g = new ConwayGrid(5, 5, [{x:1, y:0}, {x:1, y:1}, {x: 1, y:2}]);
 const c: Element = document.querySelector("canvas.grid");
 
 console.log(g.toString());
-console.log(g.getNeighbours({x:2, y: 2}));
-console.log(g.getNumNeighbours({x:2, y: 2}));
+g.next();
+console.log(g.toString());
+g.next();
+console.log(g.toString());
