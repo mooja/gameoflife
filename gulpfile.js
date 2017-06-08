@@ -19,9 +19,10 @@ gulp.task("sass", function() {
 })
 
 gulp.task("typescript", function() {
-    return gulp.src("src/main.ts")
+    return gulp.src("src/*.ts")
         .pipe(ts({
             noImplicitAny: true,
+            strictNullChecks: true,
             outFile: "main.js"
         }))
         .pipe(gulp.dest("dist"))
