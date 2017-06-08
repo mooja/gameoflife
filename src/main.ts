@@ -27,8 +27,13 @@ class ConwayGrid {
         }
         return rv;
     }
+
+    toCanvas(canvas: HTMLCanvasElement): void {
+        const ctx: CanvasRenderingContext2D = canvas.getContext("2d");
     }
 }
 
-let g = new ConwayGrid(5, 5, [{x:1, y:1}, {x:2, y:2}, {x: 4, y:4}]);
+const g = new ConwayGrid(5, 5, [{x:1, y:1}, {x:2, y:2}, {x: 4, y:4}]);
+const c: Element = document.querySelector("canvas.grid");
+
 console.log(g.toString());
