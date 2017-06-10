@@ -4,14 +4,9 @@ interface Pos {
 }
 
 class ConwayGrid {
-    alivePositions: Pos[];
-    height: number;
-    width: number;
-
-    constructor(width: number, height: number, positions: Pos[]) {
-        this.height = height;
-        this.width = width;
-        this.alivePositions = positions;
+    constructor(public width: number,
+                public height: number,
+                public alivePositions: Pos[]) {
     }
 
     getNeighbours(target: Pos): Pos[] {
