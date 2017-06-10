@@ -4,11 +4,8 @@
     font-family: "Roboto", sans-serif;
 }
 
-.conway-grid {
-    width: 500px;
-    min-height: 500px;
-    background: skyblue;
-    margin: 0 auto;
-    border: 1px solid white;
-    border-radius: 10px;
+.grid {
+    display: block;
+    border: 1px solid black;
+    margin: auto auto;
 }

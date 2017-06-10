@@ -69,11 +69,30 @@ class ConwayGrid {
     }
 }
 
-const g = new ConwayGrid(5, 5, [{x:1, y:0}, {x:1, y:1}, {x: 1, y:2}]);
-const c: Element = document.querySelector("canvas.grid");
+class CanvasDrawer {
+    constructor(private grid: ConwayGrid, private canvas: HTMLCanvasElement ) {
+    }
 
-console.log(g.toString());
-g.next();
-console.log(g.toString());
-g.next();
-console.log(g.toString());
+    draw(): void {
+        const ctx: CanvasRenderingContext2D = this.canvas.getContext('2d');
+        ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        const squareSideLen: number = 75;
+
+        for(let pos of this.grid.alivePositions) {
+            const [x, y]: [number, number] = [pos.x*squareSideLen, pos.y*squareSideLen];
+            ctx.fillRect(x, y, squareSideLen, squareSideLen);
+            ctx.strokeStyle = '#fff';
+            ctx.strokeRect(x, y, squareSideLen, squareSideLen)
+        }
+    }
+}
+
+const g = new ConwayGrid(5, 5, [{x:1, y:0}, {x:1, y:1}, {x: 1, y:2}]);
+const c: HTMLCanvasElement  = <HTMLCanvasElement>document.querySelector("canvas.grid");
+const drawer = new CanvasDrawer(g, c);
+
+setInterval(() => {
+    drawer.draw();
+    g.next()
+},
+2000);
