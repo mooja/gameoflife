@@ -3,6 +3,10 @@ interface Pos {
     y: number;
 }
 
+function mod(n: number, m: number): number {
+    return ((n % m) + m) % m;
+}
+
 class ConwayGrid {
     constructor(public width: number,
                 public height: number,
@@ -10,9 +14,10 @@ class ConwayGrid {
     }
 
     getNeighbours(target: Pos): Pos[] {
-        return this.alivePositions.filter(p => {
-            if (Math.abs(target.x - p.x) > 1) return false;
-            if (Math.abs(target.y - p.y) > 1) return false;
+        return this.alivePositions.filter(p => { 
+            let minDistanceX: number = [mod(p.x-target.x, this.width), mod(target.x-p.x, this.width)].sort()[0];
+            let minDistanceY: number = [mod(p.y-target.y, this.height), mod(target.y-p.y, this.height)].sort()[0];
+            if (minDistanceX > 1 || minDistanceY > 1) return false;
             if (target.x === p.x && target.y === p.y) return false;
             return true;
         });
@@ -82,7 +87,7 @@ class CanvasDrawer {
     }
 }
 
-const g = new ConwayGrid(5, 5, [{x:1, y:0}, {x:1, y:1}, {x: 1, y:2}]);
+const g = new ConwayGrid(5, 5, [{x:0, y:0}, {x:0, y:1}, {x:0, y:2}]);
 const c: HTMLCanvasElement  = <HTMLCanvasElement>document.querySelector("canvas.grid");
 const drawer = new CanvasDrawer(g, c);
 
