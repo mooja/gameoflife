@@ -76,7 +76,7 @@ class CanvasDrawer {
     draw(): void {
         const ctx: CanvasRenderingContext2D = this.canvas.getContext('2d');
         ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        const squareSideLen: number = 75;
+        const squareSideLen: number = this.canvas.width / this.grid.width;
 
         for(let pos of this.grid.alivePositions) {
             const [x, y]: [number, number] = [pos.x*squareSideLen, pos.y*squareSideLen];
@@ -87,7 +87,7 @@ class CanvasDrawer {
     }
 }
 
-const g = new ConwayGrid(5, 5, [{x:1, y:0}, {x:2, y:1}, {x:2, y:2}, {x:1, y:2}, {x:0, y:2}]);
+const g = new ConwayGrid(20, 20, [{x:1, y:0}, {x:2, y:1}, {x:2, y:2}, {x:1, y:2}, {x:0, y:2}]);
 const c: HTMLCanvasElement  = <HTMLCanvasElement>document.querySelector("canvas.grid");
 const drawer = new CanvasDrawer(g, c);
 
@@ -95,4 +95,4 @@ setInterval(() => {
     drawer.draw();
     g.next()
 },
-2000);
+400);
