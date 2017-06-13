@@ -3,6 +3,9 @@
 var gulp = require("gulp");
 var sass = require("gulp-sass");
 var ts = require("gulp-typescript");
+var browserify = require("browserify");
+var source = require("vinyl-source-stream");
+var tsify = require("tsify");
 var livereload = require("gulp-livereload");
 
 gulp.task("html", function() {
@@ -19,14 +22,17 @@ gulp.task("sass", function() {
 })
 
 gulp.task("typescript", function() {
-    return gulp.src("src/*.ts")
-        .pipe(ts({
-            noImplicitAny: true,
-            strictNullChecks: true,
-            outFile: "main.js"
-        }))
-        .pipe(gulp.dest("dist"))
-        .pipe(livereload());
+    return browserify({
+        basedir: ".",
+        debug: true,
+        entries: ['src/main.ts'],
+        cache: {},
+        packageCache: {}
+    })
+    .plugin(tsify)
+    .bundle()
+    .pipe(source("bundle.js"))
+    .pipe(gulp.dest("dist"));
 });
 
 gulp.task("default", ["html", "typescript", "sass"]);
