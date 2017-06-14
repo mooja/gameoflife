@@ -40,6 +40,17 @@ function main(): void {
         g.next();
         drawer.draw();
     });
+
+    c.addEventListener('click', e => {
+        const x = e.clientX - c.offsetLeft;
+        const y = e.clientY - c.offsetTop;
+        const [gridX, gridY] = drawer.getGridPos(x, y);
+
+        if(gameIsPaused) {
+            g.toggleCell({x: gridX, y: gridY});
+            drawer.draw();
+        }
+    });
 }
 
 window.addEventListener("load", main);

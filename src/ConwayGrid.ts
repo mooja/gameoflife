@@ -32,6 +32,17 @@ export class ConwayGrid {
             .some(p => target.x === p.x && target.y === p.y);
     }
 
+    toggleCell(target: Pos): void {
+        if (this.posIsAlive(target)) {
+            const idx: number = this.alivePositions
+                .findIndex(p => p.x === target.x && p.y === target.y);
+            this.alivePositions.splice(idx, 1);
+        }
+        else {
+            this.alivePositions.push(target);
+        }
+    }
+
     next(): void {
         const newAlivePositions: Pos[] = [];
 
@@ -62,9 +73,5 @@ export class ConwayGrid {
             rv += lineStr+'\n';
         }
         return rv;
-    }
-
-    toCanvas(canvas: HTMLCanvasElement): void {
-        const ctx: CanvasRenderingContext2D = canvas.getContext("2d");
     }
 }
