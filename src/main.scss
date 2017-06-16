@@ -1,8 +1,11 @@
-@import 'reset';
+@import 'base';
 
 body {
     background: #5DB4F2;
 }
+
+$canvas_width:  600px;
+$button_height: 150px;
 
 .title {
     color: #F3FAFE;
@@ -14,14 +17,34 @@ body {
     margin-bottom: -15px;
 }
 
-.grid {
-    background: #F3FAFE;
-    display: block;
+.wrap {
+    @include clearfix;
+    width: 810px;
     margin: 0 auto;
-}
 
-.controls {
-    width: 50%;
-    margin: 20px auto;
-    background-color: gray;
+    .grid {
+        background: #9ACFF5;
+        display: block;
+        margin: 0 auto;
+        width: $canvas_width;
+        height: $canvas_width;
+        float: left;
+    }
+
+    .controls {
+        width: 200px;
+        float: left;
+        margin-left:10px;
+
+    }
+
+    .button {
+        color: #FFF6F3;
+        font: 18px 'Mogra', cursive;
+        height: $button_height;
+        line-height: $button_height;
+        text-align: center;
+        background: #FF8457;
+        margin-bottom: 10px;
+    }
 }

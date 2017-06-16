@@ -12,6 +12,7 @@ export class CanvasDrawer {
 
         for(let pos of this.grid.alivePositions) {
             const [x, y]: [number, number] = [pos.x*this.squareSideLen, pos.y*this.squareSideLen];
+            ctx.fillStyle = '#00406D';
             ctx.fillRect(x, y, this.squareSideLen, this.squareSideLen);
             ctx.strokeStyle = '#fff';
             ctx.strokeRect(x, y, this.squareSideLen, this.squareSideLen)

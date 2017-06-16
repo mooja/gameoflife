@@ -8,13 +8,13 @@
     </head>
     <body>
         <h1 class="title">Conway's Game Of Life</h1>
-        <canvas class="grid" width=500 height=500></canvas>
-        <script src="bundle.js"></script>
-        <div class="container controls">
-            <form action="" onSubmit="preventDefault();">
-                <input type="button" class="pause_button" value="️Pause">
-                <input type="button" class="next_step" value="️next step">
-            </form>
+        <div class="wrap">
+            <canvas width=600 height=600 class="grid"></canvas>
+            <div class="controls">
+                <div class="button pause_button">Pause</div>
+                <div class="button next_step_button">Next</div>
+            </div>
         </div>
+        <script src="bundle.js"></script>
     </body>
 </html>
