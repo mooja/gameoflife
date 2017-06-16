@@ -1,21 +1,27 @@
+@import 'reset';
+
+body {
+    background: #5DB4F2;
+}
+
 .title {
+    color: #F3FAFE;
+    background: #259DF2; 
+    line-height: 200px;
     text-align: center;
-    font-size: 28px;
-    font-family: "Roboto", sans-serif;
+    font-size: 36px;
+    font-family: 'Mogra', cursive;
+    margin-bottom: -15px;
 }
 
 .grid {
+    background: #F3FAFE;
     display: block;
-    border: 1px solid black;
-    margin: auto auto;
+    margin: 0 auto;
 }
 
 .controls {
     width: 50%;
     margin: 20px auto;
     background-color: gray;
-}
-
-input[type=button] {
-    width: 100%;
 }
