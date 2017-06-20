@@ -5,7 +5,8 @@ body {
 }
 
 $canvas_width:  600px;
-$button_height: 150px;
+$button_height: 70px;
+$button_font_height: $button_height / 2;
 
 .title {
     color: #F3FAFE;
@@ -39,12 +40,30 @@ $button_height: 150px;
     }
 
     .button {
+        display: block;
         color: #FFF6F3;
-        font: 18px 'Mogra', cursive;
+        font: $button_font_height 'Pacifico', cursive;
+        text-shadow: 0px -2px #D1B358;
+        text-decoration: none;
         height: $button_height;
         line-height: $button_height;
         text-align: center;
         background: #FF8457;
+        border-right: 5px solid #FF8457;
         margin-bottom: 10px;
+        transition: 0.1s;
+
+        &:hover {
+            border-right: 5px solid darken(#FF8457, 25%);
+            transform: scale(1.02);
+        }
+
+        &:active {
+            transform: translate(0px, 5px);
+        }
+
+        .button-disabled {
+            color: gray;
+        }
     }
 }
