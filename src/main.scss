@@ -5,7 +5,7 @@ body {
 }
 
 $canvas_width:  600px;
-$button_height: 70px;
+$button_height: 50px;
 $button_font_height: $button_height / 2;
 
 .title {
@@ -75,7 +75,6 @@ $button_font_height: $button_height / 2;
 
         &:hover {
             border-right: 5px solid darken(#FF8457, 25%);
-            transform: scale(1.02);
         }
 
         &:active {
