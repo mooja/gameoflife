@@ -36,6 +36,26 @@ $button_font_height: $button_height / 2;
         width: 200px;
         float: left;
         margin-left:10px;
+        margin-top: 28px;
+    }
+
+    .control {
+        background: #FF8457;
+
+        input {
+            display: block;
+            margin: 0 auto;
+            text-align: center;
+            width: 80%;
+
+        }
+
+        h3 {
+            font: $button_font_height 'Pacifico', cursive;
+            text-shadow: 0px -2px #D1B358;
+            text-align: center;
+            color: #FFF6F3;
+        }
 
     }
 

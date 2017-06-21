@@ -5,19 +5,20 @@ function main(): void {
     const grid = new ConwayGrid(20, 20, [{x:1, y:0}, {x:2, y:1}, {x:2, y:2}, {x:1, y:2}, {x:0, y:2}]);
     const canvas: HTMLCanvasElement  = <HTMLCanvasElement>document.querySelector("canvas.grid");
     const renderer: CanvasDrawer = new CanvasDrawer(grid, canvas);
-    renderer.draw();
+    const [minSpeed, maxSpeed, defaultSpeed] = [0.25, 5, 2]; // steps per second
 
     const pauseButton: Element = document.querySelector(".pause_button");
     const nextStepButton: Element = document.querySelector(".next_step_button");
-    const rangeControl: Element = document.querySelector("speed");
+    const speedControl: Element = document.querySelector(".speed");
 
     let gameIsPaused = false;
     let gameIntervalId: number = runGame(grid, renderer);
-    function runGame(g: ConwayGrid, drawer: CanvasDrawer): number {
+    function runGame(g: ConwayGrid, drawer: CanvasDrawer, speed: number = defaultSpeed): number {
+        const updateInterval = 1000 / speed;
         return window.setInterval(() => {
             g.next()
             drawer.draw();
-        }, 400);
+        }, updateInterval);
     }
 
     function handlePauseButton(event) {
@@ -50,6 +51,13 @@ function main(): void {
         renderer.draw();
     }
     canvas.addEventListener('click', handleCanvasClick);
+
+    function handleSpeedChange(event) {
+            window.clearInterval(gameIntervalId);
+            const newSpeed = minSpeed + this.value*((maxSpeed-minSpeed)/100);
+            gameIntervalId = runGame(grid, renderer, newSpeed);
+    }
+    speedControl.addEventListener("input", handleSpeedChange);
 }
 
 window.addEventListener("load", main);
