@@ -25,11 +25,14 @@ function main(): void {
         if (gameIsPaused) {
             gameIntervalId = runGame(grid, renderer);
             pauseButton.innerHTML = "Pause";
+            nextStepButton.classList.add("button-inactive");
+            nextStepButton.classList.remove("button-active");
         }
         else {
             window.clearInterval(gameIntervalId);
             pauseButton.innerHTML = "Resume";
-            nextStepButton.removeAttribute("disabled");
+            nextStepButton.classList.remove("button-inactive");
+            nextStepButton.classList.add("button-active");
         }
         gameIsPaused = !gameIsPaused;
     }
@@ -53,6 +56,7 @@ function main(): void {
     canvas.addEventListener('click', handleCanvasClick);
 
     function handleSpeedChange(event) {
+            if(gameIsPaused) return;
             window.clearInterval(gameIntervalId);
             const newSpeed = minSpeed + this.value*((maxSpeed-minSpeed)/100);
             gameIntervalId = runGame(grid, renderer, newSpeed);

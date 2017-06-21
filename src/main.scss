@@ -61,14 +61,12 @@ $button_font_height: $button_height / 2;
 
     .button {
         display: block;
-        color: #FFF6F3;
         font: $button_font_height 'Pacifico', cursive;
         text-shadow: 0px -2px #D1B358;
         text-decoration: none;
         height: $button_height;
         line-height: $button_height;
         text-align: center;
-        background: #FF8457;
         border-right: 5px solid #FF8457;
         margin-bottom: 10px;
         transition: 0.1s;
@@ -80,9 +78,15 @@ $button_font_height: $button_height / 2;
         &:active {
             transform: translate(0px, 5px);
         }
+    }
 
-        .button-disabled {
-            color: gray;
-        }
+    .button-active {
+        color: #FFF6F3;
+        background: #FF8457;
+    }
+
+    .button-inactive {
+        color: darken(#FFF6F3, 20);
+        background: #FF8457;
     }
 }
