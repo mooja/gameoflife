@@ -10,6 +10,7 @@ function main(): void {
     const pauseButton: Element = document.querySelector(".pause_button");
     const nextStepButton: Element = document.querySelector(".next_step_button");
     const speedControl: Element = document.querySelector(".speed");
+    const speedDisplay: Element = document.querySelector(".control-title");
 
     let gameIsPaused = false;
     let gameIntervalId: number = runGame(grid, renderer);
@@ -58,8 +59,9 @@ function main(): void {
     function handleSpeedChange(event) {
             if(gameIsPaused) return;
             window.clearInterval(gameIntervalId);
-            const newSpeed = minSpeed + this.value*((maxSpeed-minSpeed)/100);
+            const newSpeed = minSpeed + Math.round(this.value*((maxSpeed-minSpeed)/100));
             gameIntervalId = runGame(grid, renderer, newSpeed);
+            speedDisplay.innerHTML = `Speed: ${newSpeed}`;
     }
     speedControl.addEventListener("input", handleSpeedChange);
 }
