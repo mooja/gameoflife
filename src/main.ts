@@ -61,7 +61,7 @@ function main(): void {
             window.clearInterval(gameIntervalId);
             const newSpeed = minSpeed + Math.round(this.value*((maxSpeed-minSpeed)/100));
             gameIntervalId = runGame(grid, renderer, newSpeed);
-            speedDisplay.innerHTML = `Speed: ${newSpeed}`;
+            speedDisplay.innerHTML = `Speed ${newSpeed}`;
     }
     speedControl.addEventListener("input", handleSpeedChange);
 }

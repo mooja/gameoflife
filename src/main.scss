@@ -36,10 +36,11 @@ $button_font_height: $button_height / 2;
         width: 200px;
         float: left;
         margin-left:10px;
-        margin-top: 28px;
+        margin-top: 20px;
     }
 
     .control {
+        margin-top: 5px;
         background: #FF8457;
 
         input {
@@ -68,8 +69,14 @@ $button_font_height: $button_height / 2;
         line-height: $button_height;
         text-align: center;
         border-right: 5px solid #FF8457;
-        margin-bottom: 10px;
+        margin-top: 5px;
         transition: 0.1s;
+
+    }
+
+    .button-active {
+        color: #FFF6F3;
+        background: #FF8457;
 
         &:hover {
             border-right: 5px solid darken(#FF8457, 25%);
@@ -80,13 +87,9 @@ $button_font_height: $button_height / 2;
         }
     }
 
-    .button-active {
-        color: #FFF6F3;
-        background: #FF8457;
-    }
-
     .button-inactive {
         color: darken(#FFF6F3, 20);
         background: #FF8457;
+        cursor: default;
     }
 }
