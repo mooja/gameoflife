@@ -5,6 +5,8 @@ var sass = require("gulp-sass");
 var ts = require("gulp-typescript");
 var browserify = require("browserify");
 var source = require("vinyl-source-stream");
+var buffer = require("vinyl-buffer");
+var sourcemaps = require("gulp-sourcemaps");
 var tsify = require("tsify");
 var livereload = require("gulp-livereload");
 
@@ -32,6 +34,9 @@ gulp.task("typescript", function() {
     .plugin(tsify)
     .bundle()
     .pipe(source("bundle.js"))
+    .pipe(buffer())
+    .pipe(sourcemaps.init({loadMaps: true}))
+    .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest("dist"));
 });
 
