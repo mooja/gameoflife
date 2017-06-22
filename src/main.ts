@@ -66,7 +66,7 @@ function main(): void {
             if (newSpeed == 0) return;
             gameIntervalId = runGame(grid, renderer, newSpeed);
     }
-    speedControl.addEventListener("input", handleSpeedChange);
+    speedControl.addEventListener("input", debounce(handleSpeedChange, 10, false));
 }
 
 window.addEventListener("load", main);
