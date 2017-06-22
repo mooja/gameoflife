@@ -1,15 +1,17 @@
 import { ConwayGrid, Pos } from './ConwayGrid';
 import { CanvasDrawer } from './CanvasDrawer';
+import { debounce } from './util';
 
 function main(): void {
     const grid = new ConwayGrid(20, 20, [{x:1, y:0}, {x:2, y:1}, {x:2, y:2}, {x:1, y:2}, {x:0, y:2}]);
     const canvas: HTMLCanvasElement  = <HTMLCanvasElement>document.querySelector("canvas.grid");
     const renderer: CanvasDrawer = new CanvasDrawer(grid, canvas);
-    const [minSpeed, maxSpeed, defaultSpeed] = [0.25, 5, 2]; // steps per second
+    const [minSpeed, maxSpeed, defaultSpeed] = [0, 10, 2]; // steps per second
 
     const pauseButton: Element = document.querySelector(".pause_button");
     const nextStepButton: Element = document.querySelector(".next_step_button");
-    const speedControl: Element = document.querySelector(".speed");
+    const speedControl = <HTMLInputElement>document.querySelector(".speed");
+    speedControl.value = `${100*(defaultSpeed/(maxSpeed-minSpeed))}`;
     const speedDisplay: Element = document.querySelector(".control-title");
 
     let gameIsPaused = false;
@@ -57,11 +59,12 @@ function main(): void {
     canvas.addEventListener('click', handleCanvasClick);
 
     function handleSpeedChange(event) {
-            if(gameIsPaused) return;
+            if (gameIsPaused) return;
             window.clearInterval(gameIntervalId);
-            const newSpeed = minSpeed + Math.round(this.value*((maxSpeed-minSpeed)/100));
+            const newSpeed = minSpeed + ((this.value*(maxSpeed-minSpeed))/100);
+            speedDisplay.textContent = `Speed ${newSpeed > 1 ? newSpeed.toFixed(0) : newSpeed.toFixed(1)}`;
+            if (newSpeed == 0) return;
             gameIntervalId = runGame(grid, renderer, newSpeed);
-            speedDisplay.innerHTML = `Speed ${newSpeed}`;
     }
     speedControl.addEventListener("input", handleSpeedChange);
 }
