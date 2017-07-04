@@ -61,6 +61,13 @@ export class ConwayGrid {
         this.alivePositions = newAlivePositions;
     }
 
+    resize(newSize: number): void {
+        // TODO: handle out of bounds positions
+        // * find all out of bound positions and remove them
+        this.width = newSize;
+        this.height = newSize;
+    }
+
     toString(): string {
         let rv: string = '';
         for(let row = 0; row < this.height; row++) {

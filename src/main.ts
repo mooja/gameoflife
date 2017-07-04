@@ -17,6 +17,12 @@ function main(): void {
     const [minSpeed, maxSpeed, defaultSpeed] = [0, 10, 2]; // steps per second
     speedControl.value = `${100*(defaultSpeed/(maxSpeed-minSpeed))}`;
 
+    // Size controls.
+    const sizeDisplay: Element = document.querySelector("size-display");
+    const sizeControl = <HTMLInputElement>document.querySelector(".size-control");
+    const [minSize, maxSize, defaultSize] = [10, 50, 20];
+    sizeControl.value = `${100*(defaultSize/(maxSize-minSize))}`;
+
     let gameIsPaused = false;
     let gameIntervalId: number = runGame(grid, renderer);
     function runGame(g: ConwayGrid, drawer: CanvasDrawer, speed: number = defaultSpeed): number {
@@ -70,6 +76,22 @@ function main(): void {
             gameIntervalId = runGame(grid, renderer, newSpeed);
     }
     speedControl.addEventListener("input", debounce(handleSpeedChange, 10, false));
+
+    function handleSizeChange(event): void {
+        if (!gameIsPaused)
+            window.clearInterval(gameIntervalId);
+
+        const absSize: number = (this as HTMLFormElement).value;
+        let newSize: number = Math.floor(minSize+(absSize/100)*(maxSize-minSize));
+        grid.resize(newSize);
+        renderer.resize();
+
+        if (!gameIsPaused)
+            gameIntervalId = runGame(grid, renderer);
+        else
+            renderer.draw();
+    }
+    sizeControl.addEventListener('input', handleSizeChange)
 }
 
 window.addEventListener("load", main);
