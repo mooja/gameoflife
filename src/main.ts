@@ -6,13 +6,16 @@ function main(): void {
     const grid = new ConwayGrid(20, 20, [{x:1, y:0}, {x:2, y:1}, {x:2, y:2}, {x:1, y:2}, {x:0, y:2}]);
     const canvas: HTMLCanvasElement  = <HTMLCanvasElement>document.querySelector("canvas.grid");
     const renderer: CanvasDrawer = new CanvasDrawer(grid, canvas);
-    const [minSpeed, maxSpeed, defaultSpeed] = [0, 10, 2]; // steps per second
 
+    // Pause & Next buttons.
     const pauseButton: Element = document.querySelector(".pause_button");
     const nextStepButton: Element = document.querySelector(".next_step_button");
+
+    // Speed controls.
     const speedControl = <HTMLInputElement>document.querySelector(".speed");
-    speedControl.value = `${100*(defaultSpeed/(maxSpeed-minSpeed))}`;
     const speedDisplay: Element = document.querySelector(".control-title");
+    const [minSpeed, maxSpeed, defaultSpeed] = [0, 10, 2]; // steps per second
+    speedControl.value = `${100*(defaultSpeed/(maxSpeed-minSpeed))}`;
 
     let gameIsPaused = false;
     let gameIntervalId: number = runGame(grid, renderer);
