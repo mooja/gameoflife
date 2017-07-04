@@ -68,12 +68,12 @@ function main(): void {
     canvas.addEventListener('click', handleCanvasClick);
 
     function handleSpeedChange(event) {
-            if (gameIsPaused) return;
-            window.clearInterval(gameIntervalId);
-            const newSpeed = minSpeed + ((this.value*(maxSpeed-minSpeed))/100);
-            speedDisplay.textContent = `Speed ${newSpeed > 1 ? newSpeed.toFixed(0) : newSpeed.toFixed(1)}`;
-            if (newSpeed == 0) return;
-            gameIntervalId = runGame(grid, renderer, newSpeed);
+        if (gameIsPaused) return;
+        window.clearInterval(gameIntervalId);
+        const newSpeed = minSpeed + ((this.value*(maxSpeed-minSpeed))/100);
+        speedDisplay.textContent = `Speed ${newSpeed > 1 ? newSpeed.toFixed(0) : newSpeed.toFixed(1)}`;
+        if (newSpeed == 0) return;
+        gameIntervalId = runGame(grid, renderer, newSpeed);
     }
     speedControl.addEventListener("input", debounce(handleSpeedChange, 10, false));
 
