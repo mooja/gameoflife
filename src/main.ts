@@ -23,9 +23,11 @@ function main(): void {
     const [minSize, maxSize, defaultSize] = [10, 50, 20];
     sizeControl.value = `${100*(defaultSize/(maxSize-minSize))}`;
 
+    // Global State
     let gameIsPaused = false;
+    let gameSpeed = defaultSpeed;
     let gameIntervalId: number = runGame(grid, renderer);
-    function runGame(g: ConwayGrid, drawer: CanvasDrawer, speed: number = defaultSpeed): number {
+    function runGame(g: ConwayGrid, drawer: CanvasDrawer, speed: number = gameSpeed): number {
         const updateInterval = 1000 / speed;
         return window.setInterval(() => {
             g.next()
@@ -73,7 +75,8 @@ function main(): void {
         const newSpeed = minSpeed + ((this.value*(maxSpeed-minSpeed))/100);
         speedDisplay.textContent = `Speed ${newSpeed > 1 ? newSpeed.toFixed(0) : newSpeed.toFixed(1)}`;
         if (newSpeed == 0) return;
-        gameIntervalId = runGame(grid, renderer, newSpeed);
+        gameSpeed = newSpeed;
+        gameIntervalId = runGame(grid, renderer);
     }
     speedControl.addEventListener("input", debounce(handleSpeedChange, 10, false));
 
