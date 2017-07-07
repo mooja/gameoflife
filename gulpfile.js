@@ -37,7 +37,8 @@ gulp.task("typescript", function() {
     .pipe(buffer())
     .pipe(sourcemaps.init({loadMaps: true}))
     .pipe(sourcemaps.write('./'))
-    .pipe(gulp.dest("dist"));
+    .pipe(gulp.dest("dist"))
+    .pipe(livereload());
 });
 
 gulp.task("default", ["html", "typescript", "sass"]);
