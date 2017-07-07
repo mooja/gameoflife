@@ -21,6 +21,7 @@ export class CanvasDrawer {
 
     resize(): void {
         this.squareSideLen = this.canvas.width / this.grid.width;
+        this.draw();
     }
 
     getGridPos(x: number, y: number): [number, number] {

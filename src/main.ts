@@ -91,7 +91,7 @@ function main(): void {
         else
             renderer.draw();
     }
-    sizeControl.addEventListener('input', handleSizeChange)
+    sizeControl.addEventListener('input', debounce(handleSizeChange, 10, false));
 }
 
 window.addEventListener("load", main);

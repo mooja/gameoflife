@@ -66,6 +66,10 @@ export class ConwayGrid {
         // * find all out of bound positions and remove them
         this.width = newSize;
         this.height = newSize;
+        this.alivePositions = this.alivePositions.filter(pos => {
+            const within_bounds: boolean = pos.x < this.width && pos.y < this.height;
+            return within_bounds;
+        });
     }
 
     toString(): string {
