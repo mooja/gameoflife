@@ -12,13 +12,13 @@ function main(): void {
     const nextStepButton: Element = document.querySelector(".next_step_button");
 
     // Speed controls.
-    const speedControl = <HTMLInputElement>document.querySelector(".speed");
-    const speedDisplay: Element = document.querySelector(".control-title");
+    const speedControl = <HTMLInputElement>document.querySelector(".speed-control");
+    const speedDisplay: Element = document.querySelector(".speed-display");
     const [minSpeed, maxSpeed, defaultSpeed] = [0, 10, 2]; // steps per second
     speedControl.value = `${100*(defaultSpeed/(maxSpeed-minSpeed))}`;
 
     // Size controls.
-    const sizeDisplay: Element = document.querySelector("size-display");
+    const sizeDisplay: Element = document.querySelector(".size-display");
     const sizeControl = <HTMLInputElement>document.querySelector(".size-control");
     const [minSize, maxSize, defaultSize] = [10, 50, 20];
     sizeControl.value = `${100*(defaultSize/(maxSize-minSize))}`;
@@ -85,6 +85,7 @@ function main(): void {
         let newSize: number = Math.floor(minSize+(absSize/100)*(maxSize-minSize));
         grid.resize(newSize);
         renderer.resize();
+        sizeDisplay.textContent = `Grid Size ${newSize}`;
 
         if (!gameIsPaused)
             gameIntervalId = runGame(grid, renderer);
